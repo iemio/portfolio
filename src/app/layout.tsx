@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     metadataBase: new URL(DATA.url),
     title: {
         default: DATA.name.split(" ")[0],
-        template: `%s | ${DATA.name}`,
+        template: `%s | ${DATA.name.split(" ")[0]}`,
     },
     description: DATA.description,
     openGraph: {

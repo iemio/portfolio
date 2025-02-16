@@ -3,7 +3,6 @@
 import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
-// Default values for magnification and distance
 const DEFAULT_MAGNIFICATION = 60;
 const DEFAULT_DISTANCE = 140;
 
@@ -29,23 +28,24 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
         },
         ref
     ) => {
-        // Track mouse horizontal position
         const mouseX = useMotionValue(Infinity);
 
-        // Clone and pass down the mouseX, magnification, and distance props to each child
+        // Clone and pass down the mouseX, magnification, and distance props to each child.
         const renderChildren = () =>
             React.Children.map(children, (child) => {
                 if (React.isValidElement(child)) {
-                    return React.cloneElement(child, {
-                        mouseX,
-                        magnification,
-                        distance,
-                    });
+                    return React.cloneElement(
+                        child as React.ReactElement<DockIconProps>,
+                        {
+                            mouseX,
+                            magnification,
+                            distance,
+                        }
+                    );
                 }
                 return child;
             });
 
-        // Base styling for the dock container including a blurred background
         const baseClasses =
             "mx-auto w-max h-full p-2 flex items-end rounded-full border shadow-lg backdrop-blur-xl bg-[rgba(245,245,245,0.1)] dark:bg-[rgba(31,41,55,0.6)]";
 
